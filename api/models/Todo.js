@@ -1,5 +1,5 @@
 /**
-* File.js
+* Todo.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -7,10 +7,15 @@
 
 module.exports = {
 
+	tableName: 'todos',
 	attributes: {
-		image: {
-			type: "STRING",
-			required: true
+		title: {
+			type: 'string',
+			columnName: 'title'
+		},
+		content: {
+			type: 'string',
+			columnName: 'content'
 		}
 	}
 };
