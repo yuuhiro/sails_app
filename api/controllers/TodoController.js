@@ -96,6 +96,25 @@ module.exports = {
 				res.json(doc);
 			}
 		});
+	},
+	/**
+	* `TodoController.destroy()`
+	*/
+	destroy: function(req, res) {
+		var reqBody = req.body;
+		var id = reqBody.id;
+
+		Todo.destroy({id: id})
+		.exec(function(err) {
+			if(err)
+			{
+				res.serverError(err);
+			}
+			else
+			{
+				res.json(200);
+			}
+		});
 	}
 };
 

@@ -45,6 +45,7 @@
 						var todo = res.todos[i];
 						todos += '\
 						<li class="js-todo" data-id="'+todo.id+'">\
+							<a href="#" class="js-delete-btn">削除</a>\
 							<p>'+todo.title+'</p>\
 							<p>'+todo.content+'</p>\
 							<time datetime="'+todo.updatedAt+'">'+todo.updatedAt+'</time>\
@@ -62,6 +63,18 @@
 				data: {id: id},
 				success: function(res){
 					console.log('get todos', res);
+				}
+			});
+		};
+
+		var deleteTodo = function($todo, id) {
+			$.ajax({
+				type: 'DELETE',
+				url: "/todo",
+				data: {id: id},
+				success: function(res){
+					console.log('get todos', res);
+					$todo.remove();
 				}
 			});
 		};
@@ -105,12 +118,22 @@
 		});
 
 		// 一件取得
-		$(document).on('click', '.js-todo', function(e) {
+		// $(document).on('click', '.js-todo', function(e) {
+		// 	e.preventDefault();
+		// 	var $target = $(e.currentTarget);
+		// 	var id = $target.data('id');
+
+		// 	fetchTodo(id);
+		// });
+
+		// 削除
+		$(document).on('click', '.js-delete-btn', function(e) {
 			e.preventDefault();
 			var $target = $(e.currentTarget);
-			var id = $target.data('id');
-			
-			fetchTodo(id);
+			var $todo = $target.closest('.js-todo');
+			var id = $todo.data('id');
+
+			deleteTodo($todo, id);
 		});
 	});
 </script>
